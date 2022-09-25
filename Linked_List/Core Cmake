@@ -1,0 +1,29 @@
+set(PROJ lists)
+set(BIN bin)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/cmake/${BIN}")
+
+set(SOURCES
+    main.c
+    create.c
+)
+
+include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}/../inc
+)
+
+set(LIBRARY_NAME lib_basic_operations.so)
+set(LIB_SOURCE_DIR ${CMAKE_SOURCE_DIR}/cmake/basic_operations/src)
+
+link_directories(LIB_SOURCE_DIR)
+
+add_executable(${PROJ}
+    ${SOURCES}
+)
+
+target_link_libraries(${PROJ} PUBLIC ${LIB_SOURCE_DIR}/${LIBRARY_NAME})
+install(TARGETS ${PROJ} RUNTIME DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
+#message(STATUS "CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR}")
+message(STATUS "BIN_OUTPUT_DIRECTORY: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+message(STATUS "LIB_DIR: ${LIB_SOURCE_DIR}/${LIBRARY_NAME}")
